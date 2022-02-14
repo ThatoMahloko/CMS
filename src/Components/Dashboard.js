@@ -22,19 +22,18 @@ import { db } from '../Config/Firebase';
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
-                    <Link to="/Dashboard" className="dashboard">Dashboard</Link>
-                    <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/Doctors" className="doctor">Doctors</Link>
-                    <Link to="/Patients" className="doctor">Patients</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                    <Link to="/DoctorsForm" className="doctorsform" style={{marginLeft:-110,textAlign: 'center',textDecoration: 'none',flexDirection: 'row',paddingRight:25,position: 'absolute',paddingLeft:-25}}>DoctorsForm</Link>
+                    <Link to="/Dashboard" className="dashboard" style={{marginLeft:10, textDecoration: 'none',textAlign:'center',flexDirection: 'row',paddingRight:20}}>Dashboard</Link>
+                    <Link to="/Appointment" className="appt" style={{textDecoration: 'none', textAlign: 'center',flexDirection: 'row',paddingRight:45}} >Appointment</Link>
+                    <Link to="/Doctors" className="doctor" style={{textDecoration: 'none', textAlign: 'center',flexDirection: 'row'}}>Doctors</Link>
+                    <Link to="/Patients" className="doctor" style={{textDecoration: 'none',textAlign:'center',flexDirection: 'row'}} >Patients</Link>
                 </div>
             </div>
             <p className="text2">Dashboard</p>
             <div className="info">
                 <div className="total">
                     <div className="totalText">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="102" height="96" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16" style={{ marginTop: "20px" }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="102" height="96" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16" style={{ marginTop: "5px" }}>
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                         </svg>
                         <div className="totals">
@@ -85,19 +84,21 @@ import { db } from '../Config/Firebase';
 </svg> */}
                         </div>
                         <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                        <h5 style={{ marginLeft: "300px" }}>Search:</h5>
+                        
                         <input
                             type="text"
-                        // placeholder="Search name" 
+                         placeholder="Search name" 
+                         style={{ marginLeft: "350px" }}
 
                         />
 
                     </div>
                     <div className="bar">
                         <h6>Doctors Name</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Doctor Based On</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Treatments</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Reviews</h6>
+                        
+                        <h6 style={{ marginLeft: "110px",marginRight:'-20px' }}>Doctor Based On</h6>
+                        <h6 style={{ marginLeft: "135px" }}>Treatments</h6>
+                        <h6 style={{ marginLeft: "125px" }}>Reviews</h6>
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
@@ -183,10 +184,13 @@ import { db } from '../Config/Firebase';
 </svg> */}
                         </div>
                         <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                        <h5 style={{ marginLeft: "300px" }}>Search:</h5>
+                       
                         <input
                             type="text"
-                        // placeholder="Search name" 
+                            style={{ marginLeft: "350px" }}
+
+
+                         placeholder="Search name" 
 
                         />
 

@@ -6,6 +6,7 @@
 .heading{
   color: white;
   padding-left: 15px;
+  
 }
 .rectangle2{
   background-color:rgba(5, 78, 222, 0.7) ;
@@ -47,12 +48,14 @@
 .header{
   background-color:rgba(5, 78, 222, 0.7) ;
   height: 80px;
+  width:2000px;
   margin-top: 30px;
   display:flex;
   flex-direction: row;
 }
 .screens{
-  margin-left: 60%;
+  margin-left: 48%;
+ 
   display:flex;
   flex-direction: row;
 }
@@ -80,7 +83,7 @@
 .doctor{
   background-color: white;
   height: 25px;
-  width: 70px;
+  width: 95px;
   border-radius: 20px;
   font-size: 15px;
   padding-left: 10px;
@@ -155,10 +158,10 @@
 .bar{
   display: flex;
   background-color: #c4c4c4;
-  width: 730px;
+  width: 778px;
   height: 40px;
   margin-top: 30px;
-  margin-left: 30px;
+  margin-left: 10px;
   padding-left: 15px;
   padding-top: 7px;
 }
@@ -295,4 +298,18 @@
   margin-left: 550px;
   margin-top: -265px;
   
+}
+
+.doctorsform{
+
+  background-color: white;
+  height: 25px;
+  width: 100px;
+  border-radius: 20px;
+  font-size: 15px;
+  padding-left: 10px;
+  margin-top: 25px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  margin-left: -55px;
 }
