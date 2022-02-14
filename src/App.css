@@ -47,7 +47,7 @@
 .header{
   background-color:rgba(5, 78, 222, 0.7) ;
   height: 80px;
-  margin-top: 30px;
+  margin-top: 0px;
   display:flex;
   flex-direction: row;
 }
@@ -323,3 +323,56 @@
   margin-top: -265px;
   
 }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+margin: auto;
+margin-top: 1%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #5083E8;
+  color: white;
+}
+
+#pending{
+  background-color: orange;
+}
+#accepted{
+background-color: greenyellow;
+}
+#formControl{
+  display: inline;
+}
+
+#page{
+  width:100%;
+  margin: 0;
+  padding: 0;
+}
+
+#button {
+  background-color: #5083E8; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+

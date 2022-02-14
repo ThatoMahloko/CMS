@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import '../App.css';
 import { Link } from 'react-router-dom'
 import { db } from '../Config/Firebase';
- const Dashboard = () => {
+const Dashboard = () => {
     const [doctor, setDoctor] = useState()
 
     const Doctors = () => {
@@ -22,9 +22,10 @@ import { db } from '../Config/Firebase';
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                        <Link to="/Appointment" className="appt">Appointment</Link>
-                        <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
-                        <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
+                    <Link to="/Dashboard" className="dashboard">Dashboard</Link>
+                    <Link to="/Appointment" className="appt">Appointment</Link>
+                    <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
+                    <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
                 </div>
             </div>
             <p className="text2">Dashboard</p>
@@ -82,7 +83,7 @@ import { db } from '../Config/Firebase';
 </svg> */}
                         </div>
                         <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                        <h5 style={{marginLeft:"800px"}}>Search:</h5>
+                        <h5 style={{ marginLeft: "800px" }}>Search:</h5>
                         <input
                             type="text"
                         // placeholder="Search name" 
@@ -172,7 +173,7 @@ import { db } from '../Config/Firebase';
 
 
 
-            
+
 
 
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { saveMedicalFascilities} from '../databaseServices/services';
+import { saveMedicalFascilities } from '../databaseServices/services';
 import { Link } from 'react-router-dom';
 
 function MedicalFascilities() {
@@ -31,6 +31,7 @@ function MedicalFascilities() {
                 <div className="screens">
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
+                    <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
                 </div>
             </div>
@@ -49,11 +50,11 @@ function MedicalFascilities() {
                         </label>
                     </form>
                     <form className="input">
-                    <label>
-                        <h5>Address*</h5>
-                        <input type="text" className="block" onChange={(v) => setAddres(v.target.value)} />
-                    </label>
-                        
+                        <label>
+                            <h5>Address*</h5>
+                            <input type="text" className="block" onChange={(v) => setAddres(v.target.value)} />
+                        </label>
+
                     </form>
 
                 </div>
@@ -67,11 +68,11 @@ function MedicalFascilities() {
                     </label>
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-265px" }}>
-                <label>
-                            <h5>longitude*</h5>
-                            <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
-                        </label>
-                   
+                    <label>
+                        <h5>longitude*</h5>
+                        <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
+                    </label>
+
                 </form>
 
             </div>
@@ -83,7 +84,7 @@ function MedicalFascilities() {
                     </label>
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-175px" }}>
-                <label>
+                    <label>
                         <h5>All Specialists*</h5>
                         <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
                     </label>
@@ -92,11 +93,11 @@ function MedicalFascilities() {
             </div>
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "-85px" }}>
-                <label>
+                    <label>
                         <h5>Category*</h5>
                         <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
                     </label>
-                 
+
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-85px" }}>
                     <label>
@@ -108,7 +109,7 @@ function MedicalFascilities() {
             </div>
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
-                <label >
+                    <label >
                         <h5>About*</h5>
                         <input type="text" className="bio" onChange={(v) => setAbout(v.target.value)} />
                     </label>
