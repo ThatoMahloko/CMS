@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import '../App.css'
 import { Link } from 'react-router-dom';
 import { firebase } from '../Config/Firebase'
-import { saveDoctor } from '../databaseServices/services'
+import { SaveDoctor } from '../databaseServices/services'
 
 const DoctorsForm = () => {
     const [about, setAbout] = useState("")
@@ -21,7 +21,7 @@ const DoctorsForm = () => {
         if (about === "" && email === "" && experience === "" && name === "" && patients === "" && phone === "" /*{&& profileImage === ""}*/ && ratings === "" && specialization === "" && workingTime === "") {
         } else {
             console.log(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
-            saveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
+            SaveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
         }
 
         // console.log(specialization)
@@ -34,11 +34,10 @@ const DoctorsForm = () => {
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                <Link to="/DoctorsForm" className="doctorsform" style={{marginLeft:-110,textAlign: 'center',textDecoration: 'none',flexDirection: 'row',paddingRight:25,position: 'absolute',paddingLeft:-25}}>DoctorsForm</Link>
-                    <Link to="/Dashboard" className="dashboard" style={{marginLeft:10, textDecoration: 'none',textAlign:'center',flexDirection: 'row',paddingRight:20}}>Dashboard</Link>
-                    <Link to="/Appointment" className="appt" style={{textDecoration: 'none', textAlign: 'center',flexDirection: 'row',paddingRight:45}} >Appointment</Link>
-                    <Link to="/Doctors" className="doctor" style={{textDecoration: 'none', textAlign: 'center',flexDirection: 'row'}}>Doctors</Link>
-                    <Link to="/Patients" className="doctor" style={{textDecoration: 'none',textAlign:'center',flexDirection: 'row'}} >Patients</Link>
+                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
+                    <Link to="/Dashboard" className="dashboard">Dashboard</Link>
+                    <Link to="/Appointment" className="appt">Appointment</Link>
+                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
                 </div>
             </div>
             <p className="text2">Edit Doctor Information</p>
