@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import '../App.css'
 import { Link } from 'react-router-dom';
 import { firebase } from '../Config/Firebase'
-import { saveDoctor } from '../databaseServices/services'
+import { SaveDoctor } from '../databaseServices/services'
 
 const DoctorsForm = () => {
     const [about, setAbout] = useState("")
@@ -21,7 +21,7 @@ const DoctorsForm = () => {
         if (about === "" && email === "" && experience === "" && name === "" && patients === "" && phone === "" /*{&& profileImage === ""}*/ && ratings === "" && specialization === "" && workingTime === "") {
         } else {
             console.log(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
-            saveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
+            SaveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
         }
 
         // console.log(specialization)

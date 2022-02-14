@@ -8,38 +8,42 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { updateAppoitmentStatus } from '../databaseServices/services';
+import { ReturnAppointments } from '../databaseServices/services';
 
 
-const Appointment = () => {
+const Appointment = ({ props }) => {
 
     const [appoitnments, setAppointments] = useState([])
     const [appoitnmentState, setAppointmentState] = useState(false)
-
-    
+    const [dataDoc, setDataDoc] = useState()
 
 
     useEffect(() => {
-
-        const email = firebase.auth().currentUser.email;
-        console.log(email)
-        firebase.firestore().collection('DoctorsAppointments').doc(email).collection('Bookings').onSnapshot((querySnapshot) => {
+        //const email = firebase.auth().currentUser.email;
+        firebase.firestore().collection('DoctorsAppointments').doc("thato732mahloko@gmail.com").collection('Bookings').onSnapshot((querySnapshot) => {
             const dis = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
             setAppointments(dis)
             console.log(dis)
-            return dis;
-
+            //return dis;
         })
-
     }, [])
+
+    const onAccept = () => {
+
+        const ddd = document.getElementById("documentId");
+        setDataDoc(ddd.TEXT_NODE)
+        console.log(appoitnmentState, dataDoc, ddd);
+
+
+    }
+
 
 
     return (
         <div>
-
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
@@ -50,66 +54,70 @@ const Appointment = () => {
                 </div>
             </div>
 
-            <button className="add" onPress={updateAppoitmentStatus()}>Update</button>
-            <div className="appt2">
-                <div className="show">
-                    <h5 style={{ marginLeft: "20px", marginTop: "20px" }}>Show</h5>
-                    <div className="no1">
-                        <p >10</p>
+            {
+                <div className="appt2">
+                    <table id='customers'>
+                        <tr>
+                            <th>Appoitment ID</th>
+                            <th>Doctors Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>View Appointment</th>
+                            <th>Set Appointment</th>
+                        </tr>
+                        {
 
-                    </div>
-                    <h5 style={{ marginLeft: "10px", marginTop: "20px" }}>Entries</h5>
-                    <h5 style={{ marginLeft: "1100px", marginTop: "20px" }}>Search:</h5>
-                    <input
-                        type="text"
-                        // placeholder="Search name"
-                        style={{ height: "30px", marginLeft: "10px", marginTop: "20px" }}
+                            appoitnments.map((data) => (
 
-                    />
-                </div>
+                                appoitnments.length !== null ?
 
-                {
-
-                    appoitnments.map((data) => {
-                        console.log(data)
-                        return (
-                            <div id="tableData">
-                                <table id="customers">
                                     <tr>
-                                        <th>Appoitment ID</th>
-                                        <th>Doctors Name</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>View Appointment</th>
-                                        <th>Set Appointment</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{data.id}</td>
+                                        <td id="documentId">{data.id}</td>
                                         <td>{data.Doctor}</td>
                                         <td>Empty</td>
-
-                                        {data.Status === true ?
-                                            <td id="pending">Pending</td>
-                                            :
-                                            <td id="accepted">Accepted</td>
-
+                                        {
+                                            data.Status === true ?
+                                                <td id="pending">Pending</td>
+                                                :
+                                                <td id="accepted">Accepted</td>
                                         }
                                         <td>view</td>
                                         <FormControl id="formControl" component="fieldset">
-                                            <RadioGroup aria-label="gender" name="gender1">
-                                                <FormControlLabel value="true" control={<Radio />} label="Accepted" onChange={setAppointmentState(data.Status)} />
-                                                <FormControlLabel value="false" control={<Radio />} label="Pending" onChange={setAppointmentState(data.Status)} />
-                                            </RadioGroup>
+                                            <FormControl id="formControl" component="fieldset">
+                                                <RadioGroup aria-label="gender" name="gender1">
+                                                    <FormControlLabel id="radio" name='accept' value="true" control={<Radio />} label="Accepted" onClick={(v) => setAppointmentState(true)} />
+                                                    <FormControlLabel id="radio" name="declined" value="false" control={<Radio />} label="Decline" onClick={(v) => setAppointmentState(false)} />
+                                                </RadioGroup>
+                                            </FormControl>
                                         </FormControl>
-                                        
+
                                     </tr>
-                                </table>
-                            </div>
-                        )
-                    })
-                }
+
+                                    :
+                                    <tr>
+                                        <td>Empty</td>
+                                        <td>Empty</td>
+                                        <td>Empty</td>
+                                        <td>Empty</td>
+                                        <td>Empty</td>
+                                        <td>Empty</td>
+                                    </tr>
+
+                            ))
+                        }
+
+                    </table>
+
+                </div>
+            }
+
+            <div>
+
+
+                <button className="add" onClick={onAccept}>Refresh</button>
             </div>
         </div>
     )
 }
 export default Appointment
+
