@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { saveMedicalFascilities} from '../databaseServices/services';
 import { Link } from 'react-router-dom';
-import {firebase} from '../Config/Firebase'
 
- function MedicalFascilities() {
+function MedicalFascilities() {
 
     const [name, setName] = useState("")
     const [latitude, setLatitude] = useState("")
@@ -15,26 +15,6 @@ import {firebase} from '../Config/Firebase'
     const [category, setCategory] = useState("")
     const [ratings, setRatings] = useState("")
 
-
-    const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
-        firebase.firestore().collection("MedicalFascilities").add({
-            name: name,
-            longitude: longitude,
-            latitude: latitude,
-            image: image,
-            allSpecialists: allSpecialists,
-            availabilty: availabilty,
-            address: address,
-            about: about,
-            category: category
-    
-        }).then((docRef) => {
-            console.log('Document successfully written with ID: ', docRef.id)
-            alert("Medical Fascility added successfully")
-        }).catch((error) => {
-            console.error('Error adding document: ', error)
-        })
-    })
     const createDoctor = () => {
         if (name === "" && longitude === "" && latitude === "" && image === "" && allSpecialists === "" && availabilty === "" && address === "" && about === "" && category === "") {
             alert("Please complete the form")
@@ -49,10 +29,9 @@ import {firebase} from '../Config/Firebase'
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                    <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
                 </div>
             </div>
             <p className="text2">Edit Fascility Information</p>
@@ -70,10 +49,11 @@ import {firebase} from '../Config/Firebase'
                         </label>
                     </form>
                     <form className="input">
-                        <label>
-                            <h5>longitude*</h5>
-                            <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
-                        </label>
+                    <label>
+                        <h5>Address*</h5>
+                        <input type="text" className="block" onChange={(v) => setAddres(v.target.value)} />
+                    </label>
+                        
                     </form>
 
                 </div>
@@ -87,10 +67,11 @@ import {firebase} from '../Config/Firebase'
                     </label>
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-265px" }}>
-                    <label>
-                        <h5>All Specialists*</h5>
-                        <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
-                    </label>
+                <label>
+                            <h5>longitude*</h5>
+                            <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
+                        </label>
+                   
                 </form>
 
             </div>
@@ -102,19 +83,20 @@ import {firebase} from '../Config/Firebase'
                     </label>
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-175px" }}>
-                    <label>
-                        <h5>Address*</h5>
-                        <input type="text" className="block" onChange={(v) => setAddres(v.target.value)} />
+                <label>
+                        <h5>All Specialists*</h5>
+                        <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
                     </label>
                 </form>
 
             </div>
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "-85px" }}>
-                    <label>
-                        <h5>About*</h5>
-                        <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
+                <label>
+                        <h5>Category*</h5>
+                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
                     </label>
+                 
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-85px" }}>
                     <label>
@@ -126,15 +108,9 @@ import {firebase} from '../Config/Firebase'
             </div>
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
-                    <label>
-                        <h5>Gender*</h5>
-                        <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
-                    </label>
-                </form>
-                <form style={{ marginLeft: "200px", marginTop: "10px" }}>
-                    <label>
-                        <h5>Category*</h5>
-                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
+                <label >
+                        <h5>About*</h5>
+                        <input type="text" className="bio" onChange={(v) => setAbout(v.target.value)} />
                     </label>
                 </form>
 
@@ -146,4 +122,4 @@ import {firebase} from '../Config/Firebase'
         </div>
     )
 }
-export default MedicalFascilities
+export default MedicalFascilities;

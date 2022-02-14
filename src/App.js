@@ -5,9 +5,7 @@ import LogIn from './Components/LogIn';
 import SignUp from './Components/SignUp';
 import Dashboard from './Components/Dashboard';
 import Appointment from './Components/Appointment';
-import Doctors from './Components/Doctors';
 import DoctorsForm from './Components/DoctorsForm';
-import Patients from './Components/Patients';
 import getBookings from './databaseServices/services'
 import MedicalFascilities from './Components/MedicalFascilities';
 
@@ -21,9 +19,7 @@ function App() {
         <Route path='SignUp' element={<SignUp />} />
         <Route path='Dashboard' element={<Dashboard />} />
         <Route path='Appointment' element={<Appointment />} />
-        <Route path='Doctors' element={<Doctors />} />
         <Route path='DoctorsForm' element={<DoctorsForm />} />
-        <Route path='Patients' element={<Patients />} />
         <Route path='MedicalFascilities' element={<MedicalFascilities />} />
       </Routes>
     </BrowserRouter>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import '../App.css'
 import { Link } from 'react-router-dom';
 import { firebase } from '../Config/Firebase'
-import { SaveDoctor } from '../databaseServices/services'
+import { saveDoctor } from '../databaseServices/services'
 
 const DoctorsForm = () => {
     const [about, setAbout] = useState("")
@@ -21,7 +21,7 @@ const DoctorsForm = () => {
         if (about === "" && email === "" && experience === "" && name === "" && patients === "" && phone === "" /*{&& profileImage === ""}*/ && ratings === "" && specialization === "" && workingTime === "") {
         } else {
             console.log(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
-            SaveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
+            saveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime)
         }
 
         // console.log(specialization)
@@ -34,10 +34,9 @@ const DoctorsForm = () => {
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                    <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                 </div>
             </div>
             <p className="text2">Edit Doctor Information</p>
@@ -56,7 +55,7 @@ const DoctorsForm = () => {
                     </form>
                     <form className="input">
                         <label>
-                            <label for="cars">Choose a car:</label>
+                            <label for="cars">Choose a category:</label>
 
                             <select name="cars" id="cars" onChange={(v) => setSpecialization(v.target.value)}>
                                 <option value="Neurology">Neurology</option>

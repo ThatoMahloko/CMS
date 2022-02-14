@@ -1,9 +1,8 @@
 import { firebase } from '../Config/Firebase';
-import React, { useEffect, useState } from 'react'
-import Appointment from '../Components/Appointment';
 
 
-const SaveDoctor = ((about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime) => {
+
+const saveDoctor = ((about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime) => {
     firebase.firestore().collection("Doctors").add({
         About: about,
         Email: email,
@@ -25,7 +24,7 @@ const SaveDoctor = ((about, email, experience, name, patients, phone, profileIma
 })
 
 
-const SaveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
+const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
     firebase.firestore().collection("MedicalFascilities").add({
         name: name,
         longitude: longitude,
@@ -46,7 +45,7 @@ const SaveMedicalFascilities = ((name, longitude, latitude, image, allSpecialist
 })
 
 
-const GetBookings = (() => {
+const getBookings = (() => {
 
     const email = firebase.auth().currentUser.email;
     console.log(email)
@@ -63,7 +62,7 @@ const GetBookings = (() => {
 
 })
 
-const DeleteDoctors = () => {
+const deleteDoctors = () => {
     firebase.firestore().collection('Doctors').doc("").delete()
         .then(() => {
             console.log("Document Successfully deleted!");
@@ -75,48 +74,10 @@ const DeleteDoctors = () => {
         })
 }
 
-
-
-
-const UpdateAppoitmentStatus = (doc, appoitnmentState) => {
-    firebase.firestore().collection('DoctorsAppointments').doc(doc).update({
-        Status: appoitnmentState
-    })
-        .then(() => {
-            console.log("Document successfully updated!");
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        })
-}
-
-const ReturnAppointments = (setAppointments) => {
-
-    useEffect(() => {
-
-        const email = firebase.auth().currentUser.email;
-        console.log(email)
-        firebase.firestore().collection('DoctorsAppointments').doc(email).collection('Bookings').onSnapshot((querySnapshot) => {
-            const dis = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setAppointments(dis)
-            console.log(dis)
-            return dis;
-        })
-
-    })
-}
-
 export {
-    SaveDoctor,
-    SaveMedicalFascilities,
-    GetBookings,
-    DeleteDoctors,
-    UpdateAppoitmentStatus,
-    ReturnAppointments
+    saveDoctor,
+    saveMedicalFascilities,
+    getBookings,
+    deleteDoctors,
+    // saveDoctor
 }
-
-

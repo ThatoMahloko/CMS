@@ -3,36 +3,35 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { db } from '../Config/Firebase';
  const Dashboard = () => {
+    const [doctor, setDoctor] = useState()
 
-    // const [doctor, setDoctor] = useState()
+    const Doctors = () => {
+        db.collection('Doctors')
+            .onSnapshot((snapshot) => {
+                const dis = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }))
+                setDoctor(dis)
+            })
+    }
 
-    // const Doctors = () => {
-    //     db.collection('Doctors')
-    //         .onSnapshot((snapshot) => {
-    //             const dis = snapshot.docs.map((doc) => ({
-    //                 id: doc.id,
-    //                 ...doc.data(),
-    //             }))
-    //             setDoctor(dis)
-    //         })
-    // }
 
     return (
         <div>
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
-                    <Link to="/Dashboard" className="dashboard">Dashboard</Link>
-                    <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                        <Link to="/Appointment" className="appt">Appointment</Link>
+                        <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
+                        <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                 </div>
             </div>
             <p className="text2">Dashboard</p>
             <div className="info">
                 <div className="total">
                     <div className="totalText">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="102" height="96" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16" style={{ marginTop: "5px" }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="102" height="96" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16" style={{ marginTop: "20px" }}>
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                         </svg>
                         <div className="totals">
@@ -70,7 +69,7 @@ import { db } from '../Config/Firebase';
             <div className="lists">
                 <div className="doctors-list">
                     <h4 className="name">Doctors List</h4>
-                    <hr style={{ width: "750px", marginLeft: "30px" }} />
+                    <hr style={{ width: "1300px", marginLeft: "30px" }} />
                     <div className="show">
                         <h5 style={{ marginLeft: "20px" }}>Show</h5>
                         <div className="no">
@@ -83,83 +82,81 @@ import { db } from '../Config/Firebase';
 </svg> */}
                         </div>
                         <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                        
+                        <h5 style={{marginLeft:"800px"}}>Search:</h5>
                         <input
                             type="text"
-                         placeholder="Search name" 
-                         style={{ marginLeft: "350px" }}
+                        // placeholder="Search name" 
 
                         />
 
                     </div>
                     <div className="bar">
                         <h6>Doctors Name</h6>
-                        
-                        <h6 style={{ marginLeft: "110px",marginRight:'-20px' }}>Doctor Based On</h6>
-                        <h6 style={{ marginLeft: "135px" }}>Treatments</h6>
-                        <h6 style={{ marginLeft: "125px" }}>Reviews</h6>
+                        <h6 style={{ marginLeft: "300px" }}>Doctor Based On</h6>
+                        <h6 style={{ marginLeft: "300px" }}>Treatments</h6>
+                        <h6 style={{ marginLeft: "300px" }}>Reviews</h6>
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="names">
                         <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "90px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "100px" }}>*****</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
+                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
+                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
 
                     </div>
                     <div className="show">
@@ -168,114 +165,14 @@ import { db } from '../Config/Firebase';
 
                 </div>
 
-                <div className="doctors-list">
-                    <h4 className="name">Latest Patients List</h4>
-                    <hr style={{ width: "750px", marginLeft: "30px" }} />
-                    <div className="show">
-                        <h5 style={{ marginLeft: "20px" }}>Show</h5>
-                        <div className="no">
-                            <p>10</p>
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-</svg> */}
-                        </div>
-                        <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                       
-                        <input
-                            type="text"
-                            style={{ marginLeft: "350px" }}
 
 
-                         placeholder="Search name" 
 
-                        />
 
-                    </div>
-                    <div className="bar">
-                        <h6>Patients Name</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Phone</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Email</h6>
-                        <h6 style={{ marginLeft: "110px" }}>Gender</h6>
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Olorato Pule</h6>
-                        <h6 style={{ marginLeft: "90px" }}>123456789</h6>
-                        <h6 style={{ marginLeft: "110px" }}>olorato@gmail.com</h6>
-                        <h6 style={{ marginLeft: "100px" }}>Female</h6>
-
-                    </div>
-
-                    <div className="show">
-                        <p className="text3">Showing 1 To 9 Of 9 Entries</p>
-                    </div>
-
-                </div>
+            
 
 
             </div>
