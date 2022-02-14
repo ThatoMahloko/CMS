@@ -203,7 +203,7 @@
 .remain{
   width: 90px;
   height: 25px;
-  background-color: #f61c1c;
+  background-color: #ff8800;
   border-radius: 20px;
   margin-left: 100px;
   padding-left: 7px;
@@ -295,4 +295,36 @@
   margin-left: 550px;
   margin-top: -265px;
   
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #5083E8;
+  color: white;
+}
+
+#pending{
+  background-color: orange;
+}
+#accepted{
+background-color: greenyellow;
+}
+#formControl{
+  display: inline;
 }

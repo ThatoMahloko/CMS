@@ -25,8 +25,6 @@ import { db } from '../Config/Firebase';
                     <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/Doctors" className="doctor">Doctors</Link>
-                    <Link to="/Patients" className="doctor">Patients</Link>
                     <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
                 </div>
             </div>

@@ -74,10 +74,24 @@ const deleteDoctors = () => {
         })
 }
 
+
+const updateAppoitmentStatus = (doc, appoitnmentState) => {
+    firebase.firestore().collection('DoctorsAppointments').doc(doc).update({
+        Status: appoitnmentState
+    })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        })
+}
+
 export {
     saveDoctor,
     saveMedicalFascilities,
     getBookings,
     deleteDoctors,
-    // saveDoctor
+    updateAppoitmentStatus
 }
