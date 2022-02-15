@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {firebase} from '../Config/Firebase'
+import { firebase } from '../Config/Firebase'
 
- function MedicalFascilities() {
+function MedicalFascilities() {
 
     const [profile, setProfile] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
     const [name, setName] = useState("")
@@ -28,7 +28,7 @@ import {firebase} from '../Config/Firebase'
             address: address,
             about: about,
             category: category
-    
+
         }).then((docRef) => {
             console.log('Document successfully written with ID: ', docRef.id)
             alert("Medical Fascility added successfully")
@@ -49,7 +49,7 @@ import {firebase} from '../Config/Firebase'
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setProfile( reader.result )
+                setProfile(reader.result)
             }
         }
         reader.readAsDataURL(e.target.files[0])
@@ -61,19 +61,17 @@ import {firebase} from '../Config/Firebase'
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/Doctors" className="doctor">Doctors</Link>
-                    <Link to="/Patients" className="doctor">Patients</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                    <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
+                    <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
                 </div>
             </div>
             <p className="text2">Edit Fascility Information</p>
             <h5 className="di">Fascility Image*</h5>
             <div className="info">
                 <div>
-                     <div className="img-holder">
+                    <div className="img-holder">
                         <img src={profile} alt="" id="img" className="img" />
                     </div>
 
@@ -84,18 +82,21 @@ import {firebase} from '../Config/Firebase'
                             Choose your Photo
                         </label>
                     </div>
-                    <form className="input">
-                        <label style={{ marginLeft: '-40px' }}>
+
+                    <div className="info">
+                    <form className="input2">
+                        <label style={{ marginLeft: '0px', marginTop: "-80px"  }}>
                             <h5>Name*</h5>
                             <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
                         </label>
                     </form>
-                    <form className="input">
+                    <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
                         <label>
                             <h5>longitude*</h5>
                             <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
                         </label>
                     </form>
+                    </div>
 
                 </div>
 
