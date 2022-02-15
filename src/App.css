@@ -47,7 +47,7 @@
 .header{
   background-color:rgba(5, 78, 222, 0.7) ;
   height: 80px;
-  margin-top: 30px;
+  margin-top: 0px;
   display:flex;
   flex-direction: row;
 }
@@ -65,6 +65,19 @@
   padding-left: 10px;
   margin-top: 25px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+.doctorsForm{
+  background-color: white;
+  height: 25px;
+  width: 100px;
+  border-radius: 20px;
+  font-size: 15px;
+  padding-left: 10px;
+  margin-top: 25px;
+  margin-left: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
 }
 .appt{
   background-color: white;
@@ -76,6 +89,7 @@
   margin-top: 25px;
   margin-left: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
 }
 .doctor{
   background-color: white;
@@ -87,6 +101,19 @@
   margin-top: 25px;
   margin-left: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+.medicalFacilities{
+  background-color: white;
+  height: 25px;
+  width: 130px;
+  border-radius: 20px;
+  font-size: 15px;
+  padding-left: 10px;
+  margin-top: 25px;
+  margin-left: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
 }
 .text2{
   font-size: 36px;
@@ -114,9 +141,9 @@
   display: flex;
 }
 .doctors-list{
-  width: 800px;
+  width: 1400px;
   height: 530px;
-  margin-left: 100px;
+  margin-left: 250px;
   margin-top: 30px;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.31);
@@ -155,7 +182,7 @@
 .bar{
   display: flex;
   background-color: #c4c4c4;
-  width: 730px;
+  width: 1300px;
   height: 40px;
   margin-top: 30px;
   margin-left: 30px;
@@ -330,3 +357,56 @@
   text-align: center;
   cursor: pointer;
 }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+margin: auto;
+margin-top: 1%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #5083E8;
+  color: white;
+}
+
+#pending{
+  background-color: orange;
+}
+#accepted{
+background-color: greenyellow;
+}
+#formControl{
+  display: inline;
+}
+
+#page{
+  width:100%;
+  margin: 0;
+  padding: 0;
+}
+
+#button {
+  background-color: #5083E8; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+

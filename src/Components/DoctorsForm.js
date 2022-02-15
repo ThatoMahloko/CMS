@@ -45,12 +45,10 @@ const DoctorsForm = () => {
             <div className="header">
                 <h1 className="heading">CyberPharm</h1>
                 <div className="screens">
-                    <Link to="/DoctorsForm" className="dashboard">DoctorsForm</Link>
                     <Link to="/Dashboard" className="dashboard">Dashboard</Link>
                     <Link to="/Appointment" className="appt">Appointment</Link>
-                    <Link to="/Doctors" className="doctor">Doctors</Link>
-                    <Link to="/Patients" className="doctor">Patients</Link>
-                    <Link to="/MedicalFascilities" className="doctor">medicalfasilities</Link>
+                    <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
+                    <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
                 </div>
             </div>
             <p className="text2">Edit Doctor Information</p>

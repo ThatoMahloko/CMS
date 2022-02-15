@@ -55,7 +55,7 @@ const LogIn = () => {
                         <form className="pass">
                             <label>Password<br />
                                 <input
-                                    type="text"
+                                    type="password"
                                     style={{ width: "200px" }}
                                     onChange={(password) => setPassword(password.target.value)}
 
