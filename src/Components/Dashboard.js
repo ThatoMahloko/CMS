@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //import '../App.css';
 import { Link } from 'react-router-dom'
 import { db } from '../Config/Firebase';
+import { firebase } from '../Config/Firebase'
+import Radio from '@material-ui/core/Radio'
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+
 const Dashboard = () => {
-    const [doctor, setDoctor] = useState()
+    const [doctor, setDoctor] = useState([])
+    const [BranchDoctor, setBranchDoctor] = useState([])
+    const [totalDoctors, setTotalDoctors] = useState()
+    const [totalPatients, setTotalpatients] = useState([])
+    const [branchCode, setBranchCode] = useState("")
+    const [doctorAvailabilityState, setDoctorAvailabilityState] = useState(true)
 
     const Doctors = () => {
         db.collection('Doctors')
@@ -13,9 +25,44 @@ const Dashboard = () => {
                     ...doc.data(),
                 }))
                 setDoctor(dis)
+                setTotalDoctors(doctor.length)
             })
     }
 
+    const Bookings = () => {
+        db.collection('DoctorsAppointments')
+            .onSnapshot((snapshot) => {
+                const dis = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }))
+                setTotalpatients(dis)
+            })
+    }
+
+
+    const HospitalBranchDoctors = (code) => {
+        console.log(code)
+
+
+        db.collection("MedicalFascilities").doc(code).collection("Doctors")
+            .onSnapshot((snapshot) => {
+                const dis = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }))
+                setBranchDoctor(dis)
+                console.log(BranchDoctor)
+                console.log(branchCode)
+            })
+
+    }
+
+
+    useEffect(() => {
+        Doctors()
+        Bookings()
+    })
 
     return (
         <div>
@@ -37,7 +84,7 @@ const Dashboard = () => {
                         </svg>
                         <div className="totals">
                             <h2>Total Patients</h2> <br />
-                            <h2 style={{ marginLeft: "60px" }}>50</h2>
+                            <h2 style={{ marginLeft: "60px" }}>{totalPatients.length}</h2>
                         </div>
                     </div>
                 </div>
@@ -61,7 +108,7 @@ const Dashboard = () => {
                         </svg>
                         <div className="totals">
                             <h2>Doctors</h2> <br />
-                            <h2 style={{ marginLeft: "40px" }}>10</h2>
+                            <h2 style={{ marginLeft: "40px" }}>{totalDoctors}</h2>
                         </div>
                     </div>
                 </div>
@@ -71,98 +118,63 @@ const Dashboard = () => {
                 <div className="doctors-list">
                     <h4 className="name">Doctors List</h4>
                     <hr style={{ width: "1300px", marginLeft: "30px" }} />
+
                     <div className="show">
-                        <h5 style={{ marginLeft: "20px" }}>Show</h5>
-                        <div className="no">
-                            <p>10</p>
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-</svg> */}
-                        </div>
-                        <h5 style={{ marginLeft: "10px" }}>Entries</h5>
-                        <h5 style={{ marginLeft: "800px" }}>Search:</h5>
-                        <input
-                            type="text"
-                        // placeholder="Search name" 
 
-                        />
+                        <h5 style={{ marginLeft: "990px" }}>Search:</h5>
+                        <input type="text" class="button" onChange={(v) => setBranchCode(v.target.value)} />
+                        <button class="button button2" onClick={() => HospitalBranchDoctors(branchCode)}>Search</button>
+                    </div>
+                    <table id="customers">
+                        <tr>
+                            <th>Doctors Name</th>
+                            <th>Doctors Email</th>
+                            <th>Availability</th>
+                            <th>Specialization</th>
+                            <th>Phone Number</th>
+                            <th>Workoing time</th>
+                            <th>Status</th>
+                        </tr>
+                        {
+                            branchCode === "" ?
+                                < div class="w3-panel w3-blue-grey">
+                                    <h3>Danger!</h3>
+                                    <p>Enter The branch code of the medical Fascility</p>
+                                </div>
+                                :
 
-                    </div>
-                    <div className="bar">
-                        <h6>Doctors Name</h6>
-                        <h6 style={{ marginLeft: "300px" }}>Doctor Based On</h6>
-                        <h6 style={{ marginLeft: "300px" }}>Treatments</h6>
-                        <h6 style={{ marginLeft: "300px" }}>Reviews</h6>
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
+                                BranchDoctor.map((dr) => {
+                                    return (
+                                        <>
+                                            <tr>
+                                                <td>{dr.Name}</td>
+                                                <td>{dr.Email}</td>
+                                                {
+                                                    dr.Availablity === true ?
+                                                        <td id="avail">Available</td>
+                                                        :
+                                                        <td id="booked">Booked</td>
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
+                                                }
+                                                <td>{dr.Specialization}</td>
+                                                <td>{dr.Phone}</td>
+                                                <td>{dr.WorkingTime}</td>
+                                                <FormControl id="formControl" component="fieldset">
+                                                    <FormControl id="formControl" component="fieldset">
+                                                        <RadioGroup aria-label="gender" name="gender1">
+                                                            <FormControlLabel id="radio" name='accept' value="true" control={<Radio />} label="Available" /*onClick={(v) => setDoctorAvailabilityState(true)}*/ />
+                                                            <FormControlLabel id="radio" name="declined" value="false" control={<Radio />} label="Unavailabe" /*onClick={(v) => setDoctorAvailabilityState(false)}*/ />
+                                                        </RadioGroup>
+                                                    </FormControl>
+                                                </FormControl>
+                                            </tr>
+                                        </>
+                                    )
+                                })
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
+                        }
 
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="names">
-                        <h6 style={{ color: "rgba(5, 78, 222, 0.7)" }}>Dr. Bellamy Nicholas</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Subscription</h6>
-                        <h6 style={{ marginLeft: "290px" }}>Women's Health</h6>
-                        <h6 style={{ marginLeft: "290px" }}>*****</h6>
-
-                    </div>
-                    <div className="show">
-                        <p className="text3">Showing 1 To 9 Of 9 Entries</p>
-                    </div>
+                    </table>
 
                 </div>
 
@@ -176,9 +188,9 @@ const Dashboard = () => {
 
 
 
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }
 export default Dashboard

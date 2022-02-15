@@ -1,4 +1,4 @@
-import { firebase } from '../Config/Firebase';
+import { db, firebase } from '../Config/Firebase';
 
 
 
@@ -74,10 +74,25 @@ const deleteDoctors = () => {
         })
 }
 
+// const updateDoctorsAvailability = () => {
+//     db.collection("MedicalFascilities").doc().collection("Doctors").doc(doctorId).update({
+//         Status: doctorAvailabilityState
+//     })
+//     .then(() => {
+//         console.log("Document successfully updated!");
+//     })
+//     .catch((error) => {
+//         // The document probably doesn't exist.
+//         console.error("Error updating document: ", error);
+//     });
+
+// }
+
+// }
+
 export {
     saveDoctor,
     saveMedicalFascilities,
     getBookings,
     deleteDoctors,
-    // saveDoctor
 }
