@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import { UpdateStatus, onUpdate } from './UpdateStatus';
 
 const Dashboard = () => {
     const [doctor, setDoctor] = useState([])
@@ -16,6 +17,7 @@ const Dashboard = () => {
     const [totalPatients, setTotalpatients] = useState([])
     const [branchCode, setBranchCode] = useState("")
     const [doctorAvailabilityState, setDoctorAvailabilityState] = useState(true)
+    const [doctorID, setDoctorId] = useState()
 
     const Doctors = () => {
         db.collection('Doctors')
@@ -43,8 +45,6 @@ const Dashboard = () => {
 
     const HospitalBranchDoctors = (code) => {
         console.log(code)
-
-
         db.collection("MedicalFascilities").doc(code).collection("Doctors")
             .onSnapshot((snapshot) => {
                 const dis = snapshot.docs.map((doc) => ({
@@ -55,7 +55,6 @@ const Dashboard = () => {
                 console.log(BranchDoctor)
                 console.log(branchCode)
             })
-
     }
 
 
@@ -118,15 +117,14 @@ const Dashboard = () => {
                 <div className="doctors-list">
                     <h4 className="name">Doctors List</h4>
                     <hr style={{ width: "1300px", marginLeft: "30px" }} />
-
                     <div className="show">
-
                         <h5 style={{ marginLeft: "990px" }}>Search:</h5>
                         <input type="text" class="button" onChange={(v) => setBranchCode(v.target.value)} />
                         <button class="button button2" onClick={() => HospitalBranchDoctors(branchCode)}>Search</button>
                     </div>
                     <table id="customers">
                         <tr>
+                            <th>SELECT</th>
                             <th>Doctors Name</th>
                             <th>Doctors Email</th>
                             <th>Availability</th>
@@ -142,11 +140,11 @@ const Dashboard = () => {
                                     <p>Enter The branch code of the medical Fascility</p>
                                 </div>
                                 :
-
                                 BranchDoctor.map((dr) => {
                                     return (
                                         <>
                                             <tr>
+                                                <td className='selectID' onClick={setDoctorId(dr.id)}>SELECT</td>
                                                 <td>{dr.Name}</td>
                                                 <td>{dr.Email}</td>
                                                 {
@@ -171,25 +169,11 @@ const Dashboard = () => {
                                         </>
                                     )
                                 })
-
                         }
-
                     </table>
-
+                    <UpdateStatus doctorId={doctorID} status={doctorAvailabilityState} />
                 </div>
-
-
-
-
-
-
-
-
-
-
-
             </div >
-
         </div >
     )
 }
