@@ -8,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { UpdateStatus, onUpdate } from './UpdateStatus';
 
 const Dashboard = () => {
     const [doctor, setDoctor] = useState([])
@@ -16,8 +15,7 @@ const Dashboard = () => {
     const [totalDoctors, setTotalDoctors] = useState()
     const [totalPatients, setTotalpatients] = useState([])
     const [branchCode, setBranchCode] = useState("")
-    const [doctorAvailabilityState, setDoctorAvailabilityState] = useState(true)
-    const [doctorID, setDoctorId] = useState()
+  
 
     const Doctors = () => {
         db.collection('Doctors')
@@ -72,6 +70,7 @@ const Dashboard = () => {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
+                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
                 </div>
             </div>
             <p className="text2">Dashboard</p>
@@ -144,7 +143,7 @@ const Dashboard = () => {
                                     return (
                                         <>
                                             <tr>
-                                                <td className='selectID' onClick={setDoctorId(dr.id)}>SELECT</td>
+                                                <td className='selectID'>SELECT</td>
                                                 <td>{dr.Name}</td>
                                                 <td>{dr.Email}</td>
                                                 {
@@ -171,7 +170,6 @@ const Dashboard = () => {
                                 })
                         }
                     </table>
-                    <UpdateStatus doctorId={doctorID} status={doctorAvailabilityState} />
                 </div>
             </div >
         </div >

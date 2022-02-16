@@ -8,6 +8,7 @@ import Appointment from './Components/Appointment';
 import DoctorsForm from './Components/DoctorsForm';
 import getBookings from './databaseServices/services'
 import MedicalFascilities from './Components/MedicalFascilities';
+import UpdateStatus from './Components/UpdateStatus';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='Appointment' element={<Appointment />} />
         <Route path='DoctorsForm' element={<DoctorsForm />} />
         <Route path='MedicalFascilities' element={<MedicalFascilities />} />
+        <Route path='UpdateStatus' element={<UpdateStatus />} />
       </Routes>
     </BrowserRouter>
   );
