@@ -8,17 +8,19 @@ function MedicalFascilities() {
     const [name, setName] = useState("")
     const [latitude, setLatitude] = useState("")
     const [longitude, setLongitude] = useState("")
-    const [image, seImage] = useState("")
+    const [image, setImage] = useState("")
     const [allSpecialists, setAllSpecialitst] = useState("")
     const [availabilty, setAvailabilty] = useState("")
     const [address, setAddres] = useState("")
     const [about, setAbout] = useState("")
     const [category, setCategory] = useState("")
     const [ratings, setRatings] = useState("")
+    const [branchCode, setBranchCode] = useState("")
 
 
-    const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
-        firebase.firestore().collection("MedicalFascilities").add({
+    const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode) => {
+        console.log(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode)
+        firebase.firestore().collection("MedicalFascilities").doc(branchCode).set({
             name: name,
             longitude: longitude,
             latitude: latitude,
@@ -27,20 +29,21 @@ function MedicalFascilities() {
             availabilty: availabilty,
             address: address,
             about: about,
-            category: category
+            category: category,
+            BranchCode: branchCode
 
         }).then((docRef) => {
-            console.log('Document successfully written with ID: ', docRef.id)
+            console.log('Document successfully written with ID: ', branchCode)
             alert("Medical Fascility added successfully")
         }).catch((error) => {
             console.error('Error adding document: ', error)
         })
     })
-    const createDoctor = () => {
-        if (name === "" && longitude === "" && latitude === "" && image === "" && allSpecialists === "" && availabilty === "" && address === "" && about === "" && category === "") {
+    const saveFascility = () => {
+        if (name === "" && longitude === "" && latitude === "" && image === "" && allSpecialists === "" && availabilty === "" && address === "" && about === "" && category === "" && branchCode === "") {
             alert("Please complete the form")
         } else {
-            saveMedicalFascilities(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category)
+            saveMedicalFascilities(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode)
 
         }
     }
@@ -50,6 +53,7 @@ function MedicalFascilities() {
         reader.onload = () => {
             if (reader.readyState === 2) {
                 setProfile(reader.result)
+                setImage(reader.result)
             }
         }
         reader.readAsDataURL(e.target.files[0])
@@ -85,18 +89,18 @@ function MedicalFascilities() {
                     </div>
 
                     <div className="info">
-                    <form className="input2">
-                        <label style={{ marginLeft: '0px', marginTop: "-80px"  }}>
-                            <h5>Name*</h5>
-                            <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
-                        </label>
-                    </form>
-                    <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
-                        <label>
-                            <h5>longitude*</h5>
-                            <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
-                        </label>
-                    </form>
+                        <form className="input2">
+                            <label style={{ marginLeft: '0px', marginTop: "-80px" }}>
+                                <h5>Name*</h5>
+                                <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
+                            </label>
+                        </form>
+                        <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
+                            <label>
+                                <h5>longitude*</h5>
+                                <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
+                            </label>
+                        </form>
                     </div>
 
                 </div>
@@ -139,32 +143,20 @@ function MedicalFascilities() {
                         <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
                     </label>
                 </form>
-                <form style={{ marginLeft: "200px", marginTop: "-85px" }}>
-                    <label>
-                        <h5>Ratings*</h5>
-                        <input type="text" className="block" onChange={(v) => setRatings(v.target.value)} />
-                    </label>
-                </form>
-
             </div>
             <div className="info">
+
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
                     <label>
-                        <h5>Gender*</h5>
-                        <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
-                    </label>
-                </form>
-                <form style={{ marginLeft: "200px", marginTop: "10px" }}>
-                    <label>
-                        <h5>Category*</h5>
-                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
+                        <h5>Branch Code*</h5>
+                        <input type="text" className="block" onChange={(v) => setBranchCode(v.target.value)} />
                     </label>
                 </form>
 
             </div>
 
 
-            <button className="add" onClick={createDoctor}>Add</button>
+            <button className="add" onClick={saveFascility}>Add</button>
 
         </div>
     )

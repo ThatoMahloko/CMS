@@ -2,7 +2,9 @@ import { db, firebase } from '../Config/Firebase';
 
 
 
-const saveDoctor = ((about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime) => {
+const saveDoctor = ((about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime, branchCode) => {
+
+
     firebase.firestore().collection("Doctors").add({
         About: about,
         Email: email,
@@ -13,15 +15,57 @@ const saveDoctor = ((about, email, experience, name, patients, phone, profileIma
         ProfileImage: profileImage,
         Ratings: ratings,
         Specialization: specialization,
-        WorkingTime: workingTime
-
+        WorkingTime: workingTime,
+        BranchCode: branchCode
     }).then((docRef) => {
         console.log('Document successfully written with ID: ', docRef.id)
         alert("Docter has been added successfully")
     }).catch((error) => {
         console.error('Error adding document: ', error)
     })
+
+
+    firebase.firestore().collection("MedicalFascilities").doc(branchCode).collection('Doctors').doc(email).set({
+        About: about,
+        Email: email,
+        Experience: experience,
+        Name: name,
+        Patients: patients,
+        Phone: phone,
+        ProfileImage: profileImage,
+        Ratings: ratings,
+        Specialization: specialization,
+        WorkingTime: workingTime,
+        BranchCode: branchCode
+    }).then((docRef) => {
+                console.log('Document successfully written with ID: ', docRef.id)
+                alert("Docter has been added successfully")
+            }).catch((error) => {
+                console.error('Error adding document: ', error)
+            })
+    // .add({
+    //     About: about,
+    //     Email: email,
+    //     Experience: experience,
+    //     Name: name,
+    //     Patients: patients,
+    //     Phone: phone,
+    //     ProfileImage: profileImage,
+    //     Ratings: ratings,
+    //     Specialization: specialization,
+    //     Status: status,
+    //     WorkingTime: workingTime,
+    //     BranchCode: branchCode
+    // }).then((docRef) => {
+    //         console.log('Document successfully written with ID: ', docRef.id)
+    //         alert("Docter has been added successfully")
+    //     }).catch((error) => {
+    //         console.error('Error adding document: ', error)
+    //     })
+
+    // alert("")
 })
+
 
 
 const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
@@ -74,6 +118,28 @@ const deleteDoctors = () => {
         })
 }
 
+const medicalFascilityDoctors = (about, email, experience, name, patients, phone, profileImage, ratings, specialization, status, workingTime, branchCode) => {
+    firebase.firestore().collection('MedicalFascilities').doc(branchCode).collection('Doctors').add({
+        About: about,
+        Email: email,
+        Experience: experience,
+        Name: name,
+        Patients: patients,
+        ProfileImage: profileImage,
+        Phone: phone,
+        Ratings: ratings,
+        Specializatiom: specialization,
+        Status: status,
+        WorkingTime: workingTime
+    })
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+}
+
 // const updateDoctorsAvailability = () => {
 //     db.collection("MedicalFascilities").doc().collection("Doctors").doc(doctorId).update({
 //         Status: doctorAvailabilityState
@@ -96,3 +162,4 @@ export {
     getBookings,
     deleteDoctors,
 }
+
