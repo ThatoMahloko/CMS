@@ -97,16 +97,10 @@ function MedicalFascilities() {
                         </form>
                         <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
                             <label>
-<<<<<<< HEAD
                                 <h5>All Specialists*</h5>
                                 <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
                             </label>
 
-=======
-                                <h5>longitude*</h5>
-                                <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
-                            </label>
->>>>>>> ddae977f0bd218dabd98921f10032c9d89870b39
                         </form>
                     </div>
 
@@ -156,13 +150,8 @@ function MedicalFascilities() {
 
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
                     <label>
-<<<<<<< HEAD
                         <h5>About*</h5>
                         <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
-=======
-                        <h5>Branch Code*</h5>
-                        <input type="text" className="block" onChange={(v) => setBranchCode(v.target.value)} />
->>>>>>> ddae977f0bd218dabd98921f10032c9d89870b39
                     </label>
                 </form>
 
