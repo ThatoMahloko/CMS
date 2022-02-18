@@ -68,7 +68,7 @@ const LogIn = () => {
                             </nav>
                         </p>
                         <nav>
-                            <burron to="Dashboard" className="btn" onClick={log}>LOGIN</burron>
+                            <button to="Dashboard" className="btn" onClick={log}>LOGIN</button>
                         </nav>
 
 

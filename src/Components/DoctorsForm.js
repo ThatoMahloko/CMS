@@ -1,3 +1,4 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React, { useState } from 'react';
 //import '../App.css'
 import { Link } from 'react-router-dom';
@@ -16,12 +17,12 @@ const DoctorsForm = () => {
     const [specialization, setSpecialization] = useState("")
     const [workingTime, setWorkingTime] = useState("")
     const [profile, setProfile] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
-
+    const [branchCode, setBrancCode] = useState("")
     const saveDoc = () => {
-        if (about === "" && email === "" && experience === "" && name === "" && patients === "" && phone === "" /*{&& profileImage === ""}*/ && ratings === "" && specialization === "" && workingTime === "") {
+        if (about === "" && email === "" && experience === "" && name === "" && patients === "" && phone === "" && profileImage === "" && ratings === "" && specialization === "" && workingTime === "") {
         } else {
             console.log(about, email, experience, name, patients, phone, profile, ratings, specialization, workingTime)
-            saveDoctor(about, email, experience, name, patients, phone, profile, ratings, specialization, workingTime)
+            saveDoctor(about, email, experience, name, patients, phone, profileImage, ratings, specialization, workingTime, branchCode)
         }
 
         // console.log(specialization)
@@ -33,7 +34,7 @@ const DoctorsForm = () => {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setProfile( reader.result )
+                setProfile(reader.result)
             }
         }
         reader.readAsDataURL(e.target.files[0])
@@ -49,6 +50,7 @@ const DoctorsForm = () => {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
+                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
                 </div>
             </div>
             <p className="text2">Edit Doctor Information</p>
@@ -73,15 +75,16 @@ const DoctorsForm = () => {
                         </label>
                     </form>
                     <form style={{ marginLeft: "1100px", marginTop: "-100px" }} className="input">
-                        <label>
-                            <label for="cars">Choose a category:</label>
-
-                            <select name="cars" id="cars" onChange={(v) => setSpecialization(v.target.value)}>
-                                <option value="Neurology">Neurology</option>
-                                <option value="Genetics">Genetics</option>
-                                <option value="Surgery">Surgery</option>
-                                <option value="Dentistry">Dentistry</option>
-                            </select>
+                        <label style={{ marginTop: "-60px" }}>
+                            <FormControl style={{width:'200px', marginTop:'-20px'}}>
+                                <InputLabel id="demo-simple-select-label">Select Specilization</InputLabel>
+                                <Select>
+                                    <MenuItem  value={"Neurology"}>Neurology</MenuItem>
+                                    <MenuItem value={"Dentistry"}>Dentistry</MenuItem>
+                                    <MenuItem value={"Surgery"}>Surgery</MenuItem>
+                                    <MenuItem value={"Biology"}>Biology</MenuItem>
+                                </Select>
+                            </FormControl>
                         </label>
                     </form>
 
@@ -121,11 +124,11 @@ const DoctorsForm = () => {
                     </label>
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-175px" }}>
-                    <label>
-                        <h5>Ratings*</h5>
-                        <input type="text" className="block" onChange={(v) => setRatings(v.target.value)} />
-                    </label>
-                </form>
+                <label>
+                    <h5>Branch Code*</h5>
+                    <input type="text" className="block" onChange={(v) => setBrancCode(v.target.value)} />
+                </label>
+            </form>
 
             </div>
             <div className="info">

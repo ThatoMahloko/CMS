@@ -31,7 +31,6 @@ const Appointment = ({ props }) => {
         })
     }, [])
 
-
     const onAccept = () => {
 
         console.log(dataDoc, appoitnmentState)
@@ -45,10 +44,7 @@ const Appointment = ({ props }) => {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
-
     }
-
-
 
     return (
 
@@ -60,6 +56,7 @@ const Appointment = ({ props }) => {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
+                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
                 </div>
             </div>
             {
@@ -77,9 +74,7 @@ const Appointment = ({ props }) => {
                         {
 
                             appoitnments.map((data) => (
-
                                 appoitnments.length !== null ?
-
                                     <tr>
                                         <td onClick={(v) => setDataDoc(data.id)} id="documentId">{data.id}</td>
                                         <td>{data.Doctor}</td>
@@ -99,9 +94,7 @@ const Appointment = ({ props }) => {
                                                 </RadioGroup>
                                             </FormControl>
                                         </FormControl>
-
                                     </tr>
-
                                     :
                                     <tr>
                                         <td>Empty</td>
@@ -111,18 +104,12 @@ const Appointment = ({ props }) => {
                                         <td>Empty</td>
                                         <td>Empty</td>
                                     </tr>
-
                             ))
                         }
-
                     </table>
-
                 </div>
             }
-
             <div>
-
-
                 <button className="add" onClick={onAccept}>Refresh</button>
             </div>
         </div>

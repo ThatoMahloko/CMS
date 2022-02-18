@@ -8,17 +8,19 @@ function MedicalFascilities() {
     const [name, setName] = useState("")
     const [latitude, setLatitude] = useState("")
     const [longitude, setLongitude] = useState("")
-    const [image, seImage] = useState("")
+    const [image, setImage] = useState("")
     const [allSpecialists, setAllSpecialitst] = useState("")
     const [availabilty, setAvailabilty] = useState("")
     const [address, setAddres] = useState("")
     const [about, setAbout] = useState("")
     const [category, setCategory] = useState("")
     const [ratings, setRatings] = useState("")
+    const [branchCode, setBranchCode] = useState("")
 
 
-    const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category) => {
-        firebase.firestore().collection("MedicalFascilities").add({
+    const saveMedicalFascilities = ((name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode) => {
+        console.log(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode)
+        firebase.firestore().collection("MedicalFascilities").doc(branchCode).set({
             name: name,
             longitude: longitude,
             latitude: latitude,
@@ -27,20 +29,21 @@ function MedicalFascilities() {
             availabilty: availabilty,
             address: address,
             about: about,
-            category: category
+            category: category,
+            BranchCode: branchCode
 
         }).then((docRef) => {
-            console.log('Document successfully written with ID: ', docRef.id)
+            console.log('Document successfully written with ID: ', branchCode)
             alert("Medical Fascility added successfully")
         }).catch((error) => {
             console.error('Error adding document: ', error)
         })
     })
-    const createDoctor = () => {
-        if (name === "" && longitude === "" && latitude === "" && image === "" && allSpecialists === "" && availabilty === "" && address === "" && about === "" && category === "") {
+    const saveFascility = () => {
+        if (name === "" && longitude === "" && latitude === "" && image === "" && allSpecialists === "" && availabilty === "" && address === "" && about === "" && category === "" && branchCode === "") {
             alert("Please complete the form")
         } else {
-            saveMedicalFascilities(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category)
+            saveMedicalFascilities(name, longitude, latitude, image, allSpecialists, availabilty, address, about, category, branchCode)
 
         }
     }
@@ -50,6 +53,7 @@ function MedicalFascilities() {
         reader.onload = () => {
             if (reader.readyState === 2) {
                 setProfile(reader.result)
+                setImage(reader.result)
             }
         }
         reader.readAsDataURL(e.target.files[0])
@@ -65,6 +69,7 @@ function MedicalFascilities() {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
+                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
                 </div>
             </div>
             <p className="text2">Edit Fascility Information</p>
@@ -92,10 +97,16 @@ function MedicalFascilities() {
                         </form>
                         <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
                             <label>
+<<<<<<< HEAD
                                 <h5>All Specialists*</h5>
                                 <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
                             </label>
 
+=======
+                                <h5>longitude*</h5>
+                                <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
+                            </label>
+>>>>>>> ddae977f0bd218dabd98921f10032c9d89870b39
                         </form>
                     </div>
 
@@ -140,19 +151,18 @@ function MedicalFascilities() {
                     </label>
 
                 </form>
-                <form style={{ marginLeft: "200px", marginTop: "-85px" }}>
-                    <label>
-                        <h5>Ratings*</h5>
-                        <input type="text" className="block" onChange={(v) => setRatings(v.target.value)} />
-                    </label>
-                </form>
-
             </div>
             <div className="info">
+
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
                     <label>
+<<<<<<< HEAD
                         <h5>About*</h5>
                         <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
+=======
+                        <h5>Branch Code*</h5>
+                        <input type="text" className="block" onChange={(v) => setBranchCode(v.target.value)} />
+>>>>>>> ddae977f0bd218dabd98921f10032c9d89870b39
                     </label>
                 </form>
 
@@ -160,7 +170,7 @@ function MedicalFascilities() {
             </div>
 
 
-            <button className="add" onClick={createDoctor}>Add</button>
+            <button className="add" onClick={saveFascility}>Add</button>
 
         </div>
     )
