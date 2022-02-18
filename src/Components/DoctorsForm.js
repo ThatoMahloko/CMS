@@ -68,7 +68,7 @@ const DoctorsForm = () => {
                     </div>
                     <form className="input">
                         <label style={{ marginLeft: "900px", marginTop: "-85px" }}>
-                            <h5>Name*</h5>
+                            <h5>No. of Patients Worked With*</h5>
                             <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
                         </label>
                     </form>
@@ -91,7 +91,7 @@ const DoctorsForm = () => {
             <div className="info">
                 <form className="input2">
                     <label>
-                        <h5>Email*</h5>
+                        <h5>Name*</h5>
                         <input type="text" className="block" onChange={(v) => setEmail(v.target.value)} />
                     </label>
                 </form>
@@ -107,7 +107,7 @@ const DoctorsForm = () => {
 
                 <form style={{ marginLeft: "550px", marginTop: "-175px" }}>
                     <label>
-                        <h5>No. of Patients Worked With*</h5>
+                        <h5>Email*</h5>
                         <input type="text" className="block" onChange={(v) => setPateints(v.target.value)} />
                     </label>
                 </form>

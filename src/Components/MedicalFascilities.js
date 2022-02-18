@@ -84,18 +84,19 @@ function MedicalFascilities() {
                     </div>
 
                     <div className="info">
-                    <form className="input2">
-                        <label style={{ marginLeft: '0px', marginTop: "-80px"  }}>
-                            <h5>Name*</h5>
-                            <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
-                        </label>
-                    </form>
-                    <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
-                        <label>
-                            <h5>longitude*</h5>
-                            <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
-                        </label>
-                    </form>
+                        <form className="input2">
+                            <label style={{ marginLeft: '0px', marginTop: "-80px" }}>
+                                <h5>Name*</h5>
+                                <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
+                            </label>
+                        </form>
+                        <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
+                            <label>
+                                <h5>All Specialists*</h5>
+                                <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
+                            </label>
+
+                        </form>
                     </div>
 
                 </div>
@@ -110,8 +111,8 @@ function MedicalFascilities() {
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-265px" }}>
                     <label>
-                        <h5>All Specialists*</h5>
-                        <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
+                        <h5>longitude*</h5>
+                        <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
                     </label>
                 </form>
 
@@ -134,9 +135,10 @@ function MedicalFascilities() {
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "-85px" }}>
                     <label>
-                        <h5>About*</h5>
-                        <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
+                        <h5>Category*</h5>
+                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
                     </label>
+
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-85px" }}>
                     <label>
@@ -149,16 +151,11 @@ function MedicalFascilities() {
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
                     <label>
-                        <h5>Gender*</h5>
-                        <input type="text" className="block" onChange={(v) => setName(v.target.value)} />
+                        <h5>About*</h5>
+                        <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
                     </label>
                 </form>
-                <form style={{ marginLeft: "200px", marginTop: "10px" }}>
-                    <label>
-                        <h5>Category*</h5>
-                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
-                    </label>
-                </form>
+
 
             </div>
 
