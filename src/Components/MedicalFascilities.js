@@ -69,7 +69,7 @@ function MedicalFascilities() {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
-                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
+                    <Link to="/UpdateStatus" className="appt">Update Status</Link>
                 </div>
             </div>
             <p className="text2">Edit Fascility Information</p>

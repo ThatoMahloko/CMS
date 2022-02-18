@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import './App.css';
 import nurse from '../../src/nurse.jpg';
+import logo from '../../src/logo.png'
 import { Link } from 'react-router-dom';
 import { login } from '../Auth/SignUp';
 import { useNavigate } from 'react-router-dom';
@@ -40,13 +41,15 @@ const LogIn = () => {
                 <h1 className="heading">CyberPharm</h1>
             </div>
             <div className="body">
+            
                 <div className="rectangle2">
+                <img src={logo} className="logo"/>
                     <div className="textinput">
                         <form>
                             <label>Email<br />
                                 <input
                                     type="text"
-                                    style={{ width: "200px" }}
+                                    style={{ width: "300px" }}
                                     onChange={(email) => setEmail(email.target.value)}
 
                                 />
@@ -56,20 +59,26 @@ const LogIn = () => {
                             <label>Password<br />
                                 <input
                                     type="password"
-                                    style={{ width: "200px" }}
+                                    style={{ width: "300px" }}
                                     onChange={(password) => setPassword(password.target.value)}
 
                                 />
                             </label>
                         </form>
-                        <p className="text">Don't have an account?
-                            <nav>
-                                <Link to="SignUp" style={{ color: "white" }}>Sign Up</Link>
-                            </nav>
-                        </p>
                         <nav>
                             <button to="Dashboard" className="btn" onClick={log}>LOGIN</button>
                         </nav>
+                        <p className="text">Don't have an account?
+                            <nav>
+                                <Link to="SignUp" style={{ color: "rgba(5, 78, 222, 0.7)" }}>Sign Up</Link>
+                            </nav>
+                        </p>
+                       
+                        <p className="text">Forgot Password?
+                            <nav>
+                                <Link to="ResetPassword" style={{ color: "rgba(5, 78, 222, 0.7)" }}>Reset Here</Link>
+                            </nav>
+                        </p>
 
 
                     </div>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 // import './App.css';
 import nurse from '../../src/nurse.jpg';
+import logo from '../../src/logo.png'
 import { Link } from 'react-router-dom'
 import {sinup} from '../Auth/SignUp';
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +26,14 @@ export const SignUp = () => {
                 <h1 className="heading">CyberPharm</h1>
             </div>
             <div className="body">
+               
                 <div className="rectangle2">
+                <img src={logo} className="logo"/>
                     <div className="textinput">
                         <form>
                             <label>Username<br />
                                 <input type="text" 
-                                style={{width:"200px"}}
+                                style={{width:"300px"}}
                                 onChangeText={(username) => setUsername(username.target.value)}
                                 />
                             </label>
@@ -39,7 +42,7 @@ export const SignUp = () => {
                             <label>Email<br />
                                 <input 
                                 type="text" 
-                                style={{width:"200px"}}
+                                style={{width:"300px"}}
                                 onChange={(email) => setEmail(email.target.value)}
                                
                                 />
@@ -49,7 +52,7 @@ export const SignUp = () => {
                             <label>Password<br />
                                 <input 
                                 type="text" 
-                                style={{width:"200px"}}
+                                style={{width:"300px"}}
                                 onChange={(password) => setPassword(password.target.value)}
                                 />
                             </label>
@@ -58,7 +61,7 @@ export const SignUp = () => {
                             <label>Confirm Password<br />
                                 <input 
                                 type="text" 
-                                style={{width:"200px"}}
+                                style={{width:"300px"}}
                                 onChange={(confirmPassword) => setConfirmPassword(confirmPassword.target.value)}
                                 />
                             </label>
