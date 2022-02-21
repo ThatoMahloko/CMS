@@ -1,86 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Aler } from 'react';
 import { db, firebase } from '../Config/Firebase';
 import { Link } from 'react-router-dom'
 import Radio from '@material-ui/core/Radio'
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import '../../src/UpdateStatus.css'
 
 function UpdateStatus() {
     const [doctorAvailabilityState, setDoctorAvailabilityState] = useState(true)
     const [doctor, setDoctor] = useState([])
     const [branch, setBranch] = useState([])
-    const [searchByEmail, setSearchByEmail] = useState([])
-    const [doctors, setDoctors] = useState([])
+    const [currentUserEmail, setCurrentUserEmail] = useState([])
+    const [branchDisplay, setBranchDisplay] = useState([])
+    const [branches, setBranches] = useState([])
 
-    var value = 0
-
-    /*    
-        *---------------------------------------------------STEP1---------------------------------------------------
-        *Get the users Email Address
-    */
-    const user = firebase.auth().currentUser
-    /*    
-        *---------------------------------------------------E-N-D---------------------------------------------------
-        *Get the users Email Address
+    /*
+        *get user email
     */
 
-    /*    
-        *---------------------------------------------------STEP2---------------------------------------------------
-        *Get all branches
+
+    /*
+        *get user email input
     */
-    const getAllBranches = () => {
-        db.collection("MedicalFascilities")
+
+    const validate = () => {
+        const email = firebase.auth().currentUser.email
+        if (email !== currentUserEmail) {
+            alert("Invalid Email")
+        } else {
+            branchCheck(currentUserEmail)
+        }
+    }
+
+    /*
+        *confirm that user exists in branch
+    */
+    const branchCheck = (mail) => {
+        console.log(mail + " is valid")
+        db.collection('MedicalFascilities')
             .onSnapshot((snapshot) => {
                 const dis = snapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data
                 }))
-                // console.log(branch)
-                getDoctorsInBranches(branch)
-
-                return (
-                    setBranch(dis)
-
-                )
-
+                setBranches(dis)
             })
-    }
-    /*    
-      *---------------------------------------------------E-N-D---------------------------------------------------
-      *Get all branches
-    */
+        //     alert('!!⚠️InValid Doctor Not Belonging to branch⚠️!!')
 
-    /*    
-        *---------------------------------------------------STEP3---------------------------------------------------
-        *Get all Doctors in the branches (dorctors are set by email)
-    */
-    const getDoctorsInBranches = (branch) => {
-        for (let index = 0; index >= branch.length; index++) {
-            value = branch[0];
-                db.collection('MedicalFascilities').doc(value).collection('Doctors')
-                    .onSnapshot((snapshot) => {
-                        const dis = snapshot.docs.forEach((doc) => ({
-                            id: doc.id,
-                            ...doc.data
-                        }))
-                        setDoctors(dis)
-                    })
+        console.log(branches)
 
+        if (branches.some(br => br.id === branch)) {
+            console.log('working')
+            db.collection('MedicalFascilities').doc(branch).collection('Doctors')
+                .get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        setDoctor(doc.data)
+                    });
+                });
+
+
+
+
+        } else {
+            console.log('No such Branch')
         }
-
-        /*
-        trying to get doctors in a fascilty, loop through each facility and retrive Doctors collection
-        setting sate for doctors ***const [doctors, setDoctors] = useState([])***
-        state is set for comparison for use in filter later
-        */
-        console.log('hello')
     }
 
-    useEffect(() => {
-        // getAllBranches()
-        // getDoctorsInBranches(branch)
-    }, [])
+
+
+
+
     return (
         <div>
             <div className="header">
@@ -94,31 +85,66 @@ function UpdateStatus() {
                 </div>
             </div>
 
-            <form style={{ alignItems: 'center' }}>
+
+
+            <div>
+                <input type="text" placeholder="Email Address" onChange={(v) => setCurrentUserEmail(v.target.value)} />
+                <input type="text" placeholder="Branch Code" onChange={(v) => setBranch(v.target.value)} />
+                <button onClick={() => validate()} >Submit</button>
+            </div>
+
+
+            <div>
                 <FormControl id="formControl" component="fieldset">
                     <FormControl id="formControl" component="fieldset">
                         <RadioGroup aria-label="gender" name="gender1">
                             <FormControlLabel id="radio" name='accept' value="true" control={<Radio />} label="Available" onClick={(v) => setDoctorAvailabilityState(true)} />
                             <FormControlLabel id="radio" name="declined" value="false" control={<Radio />} label="Unavailable" onClick={(v) => setDoctorAvailabilityState(false)} />
                         </RadioGroup>
+                        <button  >Submit</button>
                     </FormControl>
                 </FormControl>
-                <input type='text' placeholder="Branch Code" onChange={(v) => setSearchByEmail(v.target.value)} />
-                <button onChange={(v) => setBranch(v.target.value)}>Update Status</button>
+            </div>
 
 
-                {
-                    <table id="customers">
-                        <tr>
-                            <th>Doctor Name</th>
-                            <th>Email</th>
-                            <th>Availability</th>
-                        </tr>
-                    </table>
-                }
-            </form>
+            {
+                <table id="customers">
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Email</th>
+                        <th>Availability</th>
+                    </tr>
 
+                    {doctor.length === 0 ?
+                        doctor.map((dr) => {
+                            return (
+                                <tr key={dr.id}>
+                                    <td>EMPTY</td>
+                                    <td>EMPTY</td>
+                                    <td>EMPTY</td>
+                                </tr>
+                            )
+                        })
+                        :
+                        doctor.map((dr) => {
+                            return (
+                                <tr key={dr.id}>
+                                    <td>{dr.Name}</td>
+                                    <td>{dr.Email}</td>
+                                    {
+                                        dr.Availablity === true ?
+                                            <td id="avail">Available</td>
+                                            :
+                                            <td id="booked">Booked</td>
 
+                                    }
+                                </tr>
+                            )
+                        })
+                    }
+
+                </table>
+            }
 
         </div>
     )
