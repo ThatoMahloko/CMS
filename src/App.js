@@ -17,10 +17,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path='/' element={<LogIn />} />
+        <Route path='/' element={<LogIn />} />
         <Route path='SignUp' element={<SignUp />} />
         <Route path='ResetPassword' element={<ResetPassword />} />
-        <Route path='Dashboard' element={<Dashboard />} /> */}
+        <Route path='Dashboard' element={<Dashboard />} />
         <Route path='/' element={<Appointment />} />
         <Route path='DoctorsForm' element={<DoctorsForm />} />
         <Route path='MedicalFascilities' element={<MedicalFascilities />} />

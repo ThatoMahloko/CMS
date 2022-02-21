@@ -15,14 +15,7 @@ function UpdateStatus() {
     const [branchDisplay, setBranchDisplay] = useState([])
     const [branches, setBranches] = useState([])
 
-    /*
-        *get user email
-    */
 
-
-    /*
-        *get user email input
-    */
 
     const validate = () => {
         const email = firebase.auth().currentUser.email
@@ -67,7 +60,20 @@ function UpdateStatus() {
     }
 
 
+    const updateAvailabiltyStatus = () => {
+        const email = firebase.auth().currentUser.email
+        console.log(email, ' update')
+        db.collection('MedicalFascilities').doc(branch).collection('Doctors').doc(currentUserEmail)
+            .update({
+                Status: doctorAvailabilityState
+            }).then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                console.error("Error updating document: ", error);
+            })
 
+    }
 
 
     return (
@@ -99,7 +105,7 @@ function UpdateStatus() {
                             <FormControlLabel id="radio" name='accept' value="true" control={<Radio />} label="Available" onClick={(v) => setDoctorAvailabilityState(true)} />
                             <FormControlLabel id="radio" name="declined" value="false" control={<Radio />} label="Unavailable" onClick={(v) => setDoctorAvailabilityState(false)} />
                         </RadioGroup>
-                        <button  >Submit</button>
+                        <button onClick={updateAvailabiltyStatus}>Submit</button>
                     </FormControl>
                 </FormControl>
             </div>
