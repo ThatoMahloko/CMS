@@ -69,7 +69,7 @@ function MedicalFascilities() {
                     <Link to="/Appointment" className="appt">Appointment</Link>
                     <Link to="/MedicalFascilities" className="medicalFacilities">MedicalFacilities</Link>
                     <Link to="/DoctorsForm" className="doctorsForm">DoctorsForm</Link>
-                    <Link to="/UpdateStatus" className="doctorsForm">Update Satus</Link>
+                    <Link to="/UpdateStatus" className="appt">Update Status</Link>
                 </div>
             </div>
             <p className="text2">Edit Fascility Information</p>
@@ -97,9 +97,10 @@ function MedicalFascilities() {
                         </form>
                         <form style={{ marginLeft: "200px", marginTop: "-350px" }} className="input">
                             <label>
-                                <h5>longitude*</h5>
-                                <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
+                                <h5>All Specialists*</h5>
+                                <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
                             </label>
+
                         </form>
                     </div>
 
@@ -115,8 +116,8 @@ function MedicalFascilities() {
                 </form>
                 <form style={{ marginLeft: "200px", marginTop: "-265px" }}>
                     <label>
-                        <h5>All Specialists*</h5>
-                        <input type="text" className="block" onChange={(v) => setAllSpecialitst(v.target.value)} />
+                        <h5>longitude*</h5>
+                        <input type="text" className="block" onChange={(v) => setLongitude(v.target.value)} />
                     </label>
                 </form>
 
@@ -139,19 +140,21 @@ function MedicalFascilities() {
             <div className="info">
                 <form style={{ marginLeft: "550px", marginTop: "-85px" }}>
                     <label>
-                        <h5>About*</h5>
-                        <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
+                        <h5>Category*</h5>
+                        <input type="text" className="block" onChange={(v) => setCategory(v.target.value)} />
                     </label>
+
                 </form>
             </div>
             <div className="info">
 
                 <form style={{ marginLeft: "550px", marginTop: "10px" }}>
                     <label>
-                        <h5>Branch Code*</h5>
-                        <input type="text" className="block" onChange={(v) => setBranchCode(v.target.value)} />
+                        <h5>About*</h5>
+                        <input type="text" className="block" onChange={(v) => setAbout(v.target.value)} />
                     </label>
                 </form>
+
 
             </div>
 
