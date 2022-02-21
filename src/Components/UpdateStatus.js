@@ -48,21 +48,19 @@ function UpdateStatus() {
             })
         //     alert('!!⚠️InValid Doctor Not Belonging to branch⚠️!!')
 
-        console.log(branches)
+        // console.log(branches)
 
         if (branches.some(br => br.id === branch)) {
             console.log('working')
             db.collection('MedicalFascilities').doc(branch).collection('Doctors')
-                .get().then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for query doc snapshots
-                        setDoctor(doc.data)
-                    });
-                });
-
-
-
-
+                .onSnapshot((snapshot) => {
+                    const dis = snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }))
+                    setDoctor(dis)
+                })
+            console.log(doctor)
         } else {
             console.log('No such Branch')
         }
@@ -115,33 +113,25 @@ function UpdateStatus() {
                         <th>Availability</th>
                     </tr>
 
-                    {doctor.length === 0 ?
+                    {
                         doctor.map((dr) => {
                             return (
-                                <tr key={dr.id}>
-                                    <td>EMPTY</td>
-                                    <td>EMPTY</td>
-                                    <td>EMPTY</td>
-                                </tr>
-                            )
-                        })
-                        :
-                        doctor.map((dr) => {
-                            return (
-                                <tr key={dr.id}>
+                                <tr>
                                     <td>{dr.Name}</td>
                                     <td>{dr.Email}</td>
                                     {
-                                        dr.Availablity === true ?
-                                            <td id="avail">Available</td>
+                                        dr.Status === false ?
+                                            <td id="pending">Pending</td>
                                             :
-                                            <td id="booked">Booked</td>
-
+                                            <td id="accepted">Available</td>
                                     }
                                 </tr>
                             )
+
                         })
                     }
+
+
 
                 </table>
             }
