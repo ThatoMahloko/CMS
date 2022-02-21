@@ -57,8 +57,25 @@ function UpdateStatus() {
         } else {
             console.log('No such Branch')
         }
+
+
     }
 
+    const testExists = () => {
+        if (doctor.some(dr => dr.BranchCode === branch)) {
+            alert('Valid Doctor')
+        }
+        else {
+            alert('!!⚠️InValid Doctor Not Belonging to branch⚠️!!')
+            setDoctor(null)
+        }
+    }
+
+    // useEffect(() => {
+    //     setTimeout(function () {
+    //         testExists()
+    //     }, 10000)
+    // })
 
     const updateAvailabiltyStatus = () => {
         const email = firebase.auth().currentUser.email
